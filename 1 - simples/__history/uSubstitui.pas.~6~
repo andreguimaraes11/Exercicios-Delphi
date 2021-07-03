@@ -1,0 +1,70 @@
+﻿unit uSubstitui;
+
+interface
+
+uses
+  uISubstitui;
+
+type
+  TSubstitui = class(TInterfacedObject, ISubstitui)
+    function Substituir(Str, Velho, Novo: String): String;
+  end;
+
+
+implementation
+uses
+  StrUtils;
+
+{ TSubstitui }
+
+function TSubstitui.Substituir(Str, Velho, Novo: String): String;
+var
+  _lenOldStr : integer;
+  _char : integer;
+
+  _result : string;
+  _trechoAtual: string;
+
+  _tamPercorrido : integer;
+
+  _strRestante : string;
+  _countSemOcorrenciaVelhaStr : integer;
+begin
+  _lenOldStr := Length(Velho);
+  _char := 0;
+  _countSemOcorrenciaVelhaStr := 0;
+  while (_char < pred(length(Str))) do
+  begin
+    _strRestante := RightStr(Str, length(Str) - _char);
+    _trechoAtual := LeftStr(_strRestante, _lenOldStr) ;
+
+    if  _trechoAtual <> Velho then
+    begin
+      Inc(_char);
+      Inc(_countSemOcorrenciaVelhaStr);
+
+      if (_countSemOcorrenciaVelhaStr = _lenOldStr) then
+      begin
+        _result := _result + LeftStr(_strRestante, _lenOldStr);
+        _countSemOcorrenciaVelhaStr := 0;
+      end;
+
+      Continue;
+    end;
+
+    _result := _result + LeftStr(Str, _char);
+    _result := _result + Novo;
+
+    _tamPercorrido := _char + _lenOldStr;
+    Str := RightStr(Str, Length(Str) - _tamPercorrido);
+    _char := 0;
+  end;
+
+  Result := _result;
+
+  if Length(_strRestante) <= _lenOldStr then
+    Result := Result + _strRestante;
+end;
+
+end.
+

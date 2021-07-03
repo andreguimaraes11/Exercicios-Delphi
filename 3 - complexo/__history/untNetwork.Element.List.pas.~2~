@@ -1,0 +1,34 @@
+unit untNetwork.Element.List;
+
+interface
+
+uses
+  System.Generics.Collections,
+  untNetwork.Element;
+type
+  TNetworkElementList = class
+  strict private
+    FListaConnections : TObjectList<TNetworkElement>;
+  public
+    constructor Create;
+    destructor Destroy; override;
+
+  end;
+
+implementation
+
+{ TNetworkElementList }
+
+constructor TNetworkElementList.Create;
+begin
+  Self.FListaConnections := TObjectList<TNetworkElement>;
+  Self.FListaConnections.OwnsObjects := True;
+end;
+
+destructor TNetworkElementList.Destroy;
+begin
+  FListaConnections.Free;
+  inherited;
+end;
+
+end.

@@ -1,0 +1,65 @@
+﻿unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, Classes, uTroco;
+
+type
+  TMaquina = class(TInterfacedObject, IMaquina)
+  strict private
+    FValorTroco : Double;
+
+    procedure PreencherCedulas(ALista : TList);
+    procedure PreencherMoedas(ALista : TList);
+  public
+    function MontarTroco(Troco: Double): TList;
+  end;
+
+implementation
+
+uses
+  math, Vcl.Dialogs, System.SysUtils;
+
+function TMaquina.MontarTroco(Troco: Double): TList;
+begin
+  Result := TList.Create;
+  if Troco = 0 then
+    Exit;
+
+  FValorTroco := Troco;
+
+  PreencherCedulas(Result);
+  PreencherMoedas(Result);
+end;
+
+procedure TMaquina.PreencherCedulas(ALista: TList);
+var
+  _vlrRestanteTroco : integer;
+  _mod : integer;
+
+  _vlrCedula : integer;
+begin
+  _vlrRestanteTroco := Trunc(FValorTroco);
+
+  while _vlrRestanteTroco <> 0 do
+  begin
+    _vlrCedula := Trunc(CValorCedula[ceNota100]);
+    _mod := _vlrRestanteTroco div _vlrCedula;
+    showmessage(IntToStr(_mod));
+    exit;
+//    if () then
+    begin
+
+    end;
+
+  end;
+end;
+
+procedure TMaquina.PreencherMoedas(ALista: TList);
+begin
+
+end;
+
+end.
+

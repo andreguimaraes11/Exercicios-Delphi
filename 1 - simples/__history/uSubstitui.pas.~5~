@@ -1,0 +1,46 @@
+﻿unit uSubstitui;
+
+interface
+
+uses
+  uISubstitui;
+
+type
+  TSubstitui = class(TInterfacedObject, ISubstitui)
+    function Substituir(Str, Velho, Novo: String): String;
+  end;
+
+
+implementation
+uses
+  StrUtils;
+
+{ TSubstitui }
+
+function TSubstitui.Substituir(Str, Velho, Novo: String): String;
+var
+  _lenOldStr : integer;
+  _pos : integer;
+
+  _result : string;
+  _trechoAtual: string;
+
+  _strRestante : string;
+begin
+  _result := Str;
+  _lenOldStr := Length(Novo);
+  for _pos := 0 to pred(length(Str)) do
+  begin
+    _strRestante := RightStr(Str, length(Str) - _pos);
+    _trechoAtual := LeftStr(_strRestante, _lenOldStr) ;
+    if  _trechoAtual <> Velho then
+      Continue
+
+    _result := _result + Novo;
+  end;
+
+  Result := _result;
+end;
+
+end.
+

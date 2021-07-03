@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BorlandProject>
+	<Transactions>
+    <Transaction>2020/06/03 19:00:07.000.816,=D:\Perfil\Documentos\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/06/06 16:35:26.000.862,=D:\Perfil\Documentos\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2020/06/09 18:12:04.000.801,=D:\Perfil\Documentos\Embarcadero\Studio\Projects\Unit2.pas</Transaction>
+    <Transaction>2021/01/14 00:19:23.093,=D:\Perfil\Documentos\Embarcadero\Studio\Projects\Unit6.pas</Transaction>
+    <Transaction>2021/01/14 00:19:45.252,D:\Perfil\Desktop\Viasoft\3 - complexo\prjComplexo.dproj=D:\Perfil\Documentos\Embarcadero\Studio\Projects\Project1.dproj</Transaction>
+    <Transaction>2021/01/14 00:27:38.125,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:27:48.482,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:28:14.959,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:28:24.546,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Intf.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:49:41.140,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:55:31.708,D:\Perfil\Desktop\Viasoft\3 - complexo\untPrincipal.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:55:31.708,D:\Perfil\Desktop\Viasoft\3 - complexo\untPrincipal.dfm=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.dfm</Transaction>
+    <Transaction>2021/01/14 00:56:22.076,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 00:56:32.617,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Element.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:00:53.490,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:01:02.379,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Element.List.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:13:25.177,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:13:39.396,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Element.List.Connector.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:15:50.781,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Element.List.Connector.pas=</Transaction>
+    <Transaction>2021/01/14 01:15:50.802,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Element.List.pas=</Transaction>
+    <Transaction>2021/01/14 01:55:11.092,=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+    <Transaction>2021/01/14 01:55:20.594,D:\Perfil\Desktop\Viasoft\3 - complexo\untNetwork.Exceptions.pas=D:\Perfil\Desktop\Viasoft\3 - complexo\Unit1.pas</Transaction>
+  </Transactions>
+</BorlandProject>

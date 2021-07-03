@@ -1,0 +1,12 @@
+unit untNetwork.Intf;
+
+interface
+type
+  INetwork = interface
+    ['{2038E6FA-0796-47D7-86C6-3004C521F9CD}']
+  end;
+
+
+implementation
+
+end.

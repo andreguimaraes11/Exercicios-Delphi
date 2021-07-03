@@ -1,0 +1,124 @@
+﻿unit untPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.WinXPanels,
+  Vcl.ExtCtrls, untNetwork.Intf, untNetwork.Element;
+
+type
+  TPanelComElemento = class(TPanel)
+  private
+    FElemento: TNetworkElement;
+    procedure SetElemento(const Value: TNetworkElement);
+  published
+    property Elemento : TNetworkElement read FElemento write SetElemento;
+    destructor destroy; override;
+  end;
+
+  TForm1 = class(TForm)
+    CardPanel1: TCardPanel;
+    cardWaiting: TCard;
+    cardNetwork: TCard;
+    Label1: TLabel;
+    btnCriarNetwork: TButton;
+    edtNumeroElementos: TEdit;
+    Label2: TLabel;
+    ScrollBox1: TScrollBox;
+    flowElementos: TFlowPanel;
+    procedure btnCriarNetworkClick(Sender: TObject);
+  private
+    { Private declarations }
+
+    FNetwork : INetwork;
+
+    procedure CriarPaineisElementos;
+
+    procedure ElementoPnlMouseEnter(Sender : TObject);
+    procedure ElementoPnlMouseLeave(Sender : TObject);
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+
+uses
+  untNetwork;
+
+{$R *.dfm}
+
+procedure TForm1.btnCriarNetworkClick(Sender: TObject);
+begin
+  FNetwork := TNetwork.Create(StrToIntDef(edtNumeroElementos.Text, 0));
+  ShowMessage('Network criada com ['+edtNumeroElementos.Text+'] elementos.');
+  CriarPaineisElementos();
+
+  CardPanel1
+end;
+
+procedure TForm1.CriarPaineisElementos;
+var
+  I: Integer;
+  _totElementos: Integer;
+
+  _pnl : TPanelComElemento;
+  _elemento: TNetworkElement;
+begin
+  _totElementos := StrToInt(edtNumeroElementos.Text);
+  for I := 1 to _totElementos do
+  begin
+    _pnl := TPanelComElemento.Create(nil);
+
+    _elemento := TNetworkElement.Create(i);
+    with _pnl do
+    begin
+      width := 51;
+      Height := 41;
+      Parent := flowElementos;
+      BevelInner := bvRaised;
+      BevelOuter := bvLowered;
+
+      Cursor := crHandPoint;
+
+      Caption := i.ToString;
+
+      font.Name := 'segoe ui semibold';
+      font.Size := 10;
+      font.Color := clWindowText;
+
+      Elemento := _elemento;
+
+      OnMouseEnter := ElementoPnlMouseEnter;
+      OnMouseLeave := ElementoPnlMouseLeave;
+    end;
+  end;
+end;
+
+procedure TForm1.ElementoPnlMouseEnter(Sender: TObject);
+begin
+  TPanel(Sender).BevelOuter := bvRaised;
+end;
+
+procedure TForm1.ElementoPnlMouseLeave(Sender: TObject);
+begin
+  TPanel(Sender).BevelOuter := bvLowered;
+end;
+
+{ TPanelComElemento }
+
+destructor TPanelComElemento.destroy;
+begin
+  Self.FElemento.Free;
+  inherited;
+end;
+
+procedure TPanelComElemento.SetElemento(const Value: TNetworkElement);
+begin
+  FElemento := Value;
+end;
+
+end.

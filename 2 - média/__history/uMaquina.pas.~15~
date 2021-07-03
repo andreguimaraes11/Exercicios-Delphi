@@ -1,0 +1,95 @@
+unit uMaquina;
+
+interface
+
+uses
+  uIMaquina, Classes, uTroco;
+
+type
+  TMaquina = class(TInterfacedObject, IMaquina)
+  strict private
+    FValorTroco : Double;
+
+    procedure PreencherCedulas(ALista : TList);
+    procedure PreencherMoedas(ALista : TList);
+  public
+    function MontarTroco(Troco: Double): TList;
+  end;
+
+implementation
+
+uses
+  math, Vcl.Dialogs, System.SysUtils;
+
+function TMaquina.MontarTroco(Troco: Double): TList;
+begin
+  Result := TList.Create;
+  if Troco = 0 then
+    Exit;
+
+  FValorTroco := Troco;
+
+  PreencherCedulas(Result);
+  PreencherMoedas(Result);
+end;
+
+procedure TMaquina.PreencherCedulas(ALista: TList);
+  procedure GerarTrocoCedula(var ALista : TList; var ATrocoValor : integer; ACedula : TCedula);
+  var
+    _vlrCedula: integer;
+    _div: integer;
+  begin
+    _vlrCedula := Trunc(CValorCedula[ACedula]);
+    _div := ATrocoValor div _vlrCedula;
+    ATrocoValor := ATrocoValor - (_div * _vlrCedula);
+
+    if _div > 0 then
+      ALista.Add(TTroco.Create(ACedula, _div));
+  end;
+var
+  _vlrRestanteTroco : integer;
+  _div : integer;
+
+  _vlrCedula : integer;
+begin
+  _vlrRestanteTroco := Trunc(FValorTroco);
+
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota100);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota50);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota20);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota10);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota5);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceNota2);
+  GerarTrocoCedula(ALista, _vlrRestanteTroco, ceMoeda100);
+end;
+
+procedure TMaquina.PreencherMoedas(ALista: TList);
+  procedure GerarTrocoMoeda(var ALista : TList; var ATrocoValor : integer; ACedula : TCedula);
+  var
+    _vlrMoeda: integer;
+    _div: integer;
+  begin
+    _vlrMoeda := Trunc(CValorCedula[ACedula]);
+    _div := ATrocoValor div _vlrMoeda;
+    ATrocoValor := ATrocoValor - (_div * _vlrMoeda);
+
+    if _div > 0 then
+      ALista.Add(TTroco.Create(ACedula, _div));
+  end;
+var
+  _vlrRestanteTroco : Double;
+  _div : integer;
+
+  _vlrCedula : integer;
+begin
+  _vlrRestanteTroco := FValorTroco - Trunc(FValorTroco);
+
+  GerarTrocoMoeda(ALista, _vlrRestanteTroco, ceMoeda50);
+  GerarTrocoMoeda(ALista, _vlrRestanteTroco, ceMoeda25);
+  GerarTrocoMoeda(ALista, _vlrRestanteTroco, ceMoeda10);
+  GerarTrocoMoeda(ALista, _vlrRestanteTroco, ceMoeda5);
+  GerarTrocoMoeda(ALista, _vlrRestanteTroco, ceMoeda1);
+end;
+
+end.
+

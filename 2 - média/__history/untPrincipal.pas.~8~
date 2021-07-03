@@ -1,0 +1,90 @@
+unit untPrincipal;
+
+interface
+
+uses
+  Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.StdCtrls, Vcl.Mask, Vcl.ExtCtrls;
+
+type
+  TForm1 = class(TForm)
+    edtVlrTroco: TLabeledEdit;
+    Button1: TButton;
+    memTroco: TMemo;
+    procedure edtVlrTrocoKeyPress(Sender: TObject; var Key: Char);
+    procedure Button1Click(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form1: TForm1;
+
+implementation
+uses
+  StrUtils,
+  uIMaquina,
+  uMaquina,
+  System.Generics.Collections,
+  uTroco;
+
+{$R *.dfm}
+
+procedure TForm1.Button1Click(Sender: TObject);
+var
+  _maquina : IMaquina;
+  _vlrTroco: Double;
+
+  _listaTroco : TObjectList<TTroco>;
+  _troco: TTroco;
+begin
+  _vlrTroco := StrToFloatDef(edtVlrTroco.Text, 0);
+  if _vlrTroco <= 0 then
+  begin
+    ShowMessage('Não há troco a ser devolvido.');
+    Exit;
+  end;
+
+  _maquina := TMaquina.Create;
+  _listaTroco := _maquina.MontarTroco(_vlrTroco);
+  try
+    for _troco in _listaTroco do
+    begin
+      memTroco.Lines.Add
+    end;
+  finally
+    _listaTroco.Free;
+  end;
+
+  memTroco.Clear;
+end;
+
+procedure TForm1.edtVlrTrocoKeyPress(Sender: TObject; var Key: Char);
+var
+  _troco : string;
+  _trocoArr: TArray<string>;
+begin
+  if not (key in ['0'..'9',',', #8]) then
+  begin
+    key :=#0;
+    Exit;
+  end;
+
+  if Key = #8 then
+    Exit;
+
+  _troco := edtVlrTroco.Text;
+  if _troco.Contains(',') then
+  begin
+    if Key = ',' then
+      Abort;
+
+    _trocoArr := _troco.Split([',']);
+    if _trocoArr[1].Length = 2 then
+      Abort;
+  end;
+end;
+
+end.

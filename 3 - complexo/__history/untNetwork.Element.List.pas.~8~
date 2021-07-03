@@ -1,0 +1,67 @@
+unit untNetwork.Element.List;
+
+interface
+uses
+  untNetwork.Element.List.Connector,
+  System.Generics.Collections;
+type
+  TNetworkElementList = class
+  strict private
+    FListaConnections : TObjectList<TNetworkElementConnector>;
+  public
+    procedure Add(AElement : TNetworkElementConnector);
+    procedure Remove(AElement : TNetworkElementConnector); overload;
+    procedure Remove(AIdx : integer); overload;
+
+    constructor Create;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+uses
+  System.SysUtils;
+
+{ TNetworkElementList }
+
+procedure TNetworkElementList.Add(AElement : TNetworkElementConnector);
+var
+  i : integer;
+begin
+  for i := 0 to pred(FListaConnections.Count) do
+  begin
+    if AElement.Element.Number = FListaConnections.Items[i].Element.Number then
+      raise Exception.Create('[TNetworkElementList] - Elemento já adicionado');
+  end;
+
+  FListaConnections.Add(AElement);
+  FListaConnections.TrimExcess;
+end;
+
+constructor TNetworkElementList.Create;
+begin
+  Self.FListaConnections := TObjectList<TNetworkElementConnector>;
+  Self.FListaConnections.OwnsObjects := True;
+end;
+
+destructor TNetworkElementList.Destroy;
+begin
+  FListaConnections.Free;
+  inherited;
+end;
+
+procedure TNetworkElementList.Remove(AElement: TNetworkElementConnector);
+begin
+  FListaConnections.Remove(AElement);
+end;
+
+procedure TNetworkElementList.Remove(AIdx: integer);
+begin
+  if FListaConnections.Count < AIdx then
+    raise Exception.Create('[TNetworkElementList] - Index acessado inválido. Index ['+Aidx.ToString+'] '+
+    '- Total da lista ['+FListaConnections.Count.ToString+']');
+
+  FListaConnections.Remove(FListaConnections.Items[AIdx]);
+end;
+
+end.

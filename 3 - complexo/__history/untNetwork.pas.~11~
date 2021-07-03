@@ -1,0 +1,85 @@
+unit untNetwork;
+
+interface
+
+uses
+  untNetwork.Intf,
+  System.Generics.Collections,
+  untNetwork.Element;
+Type
+  TNetwork = class(TInterfacedObject, INetwork)
+  strict private
+    FTotalElements : integer;
+    FElementos : TDictionary<integer, TNetworkElement>;
+  private
+    procedure Connect(AFirstElement, ASecondElement : integer);
+    function Query(AFirstElement, ASecondElement : integer) : boolean;
+  public
+    constructor Create(ATotalElements : integer);
+    property Elementos : TDictionary<integer, TNetworkElement> read FElementos;
+    destructor Destroy; override;
+  end;
+
+implementation
+
+uses
+  System.SysUtils,
+  untNetwork.Exceptions;
+
+{ TNetwork }
+
+procedure TNetwork.Connect(AFirstElement, ASecondElement: integer);
+begin
+  try
+    FElementos.
+      Items[AFirstElement].
+        Connections.
+          Add(
+            FElementos.
+              Items[ASecondElement]
+            );
+
+    FElementos.
+      Items[AFirstElement].
+        Connections.
+          Add(
+            FElementos.
+              Items[AFirstElement]
+            );
+  except
+    on e:exception do
+      raise Exception.Create('[TNetwork] - Erro ao conectar elementos. Erro: '+e.Message);
+    on e:EElementoJaAdicionado do
+      raise;
+  end;
+end;
+
+constructor TNetwork.Create(ATotalElements: integer);
+var
+  I: Integer;
+begin
+  if Frac(ATotalElements) <> 0 then
+    raise Exception.Create('[TNetwork] - O número de elementos p/ a criação deve ser um inteiro.');
+
+  FElementos := TDictionary<integer, TNetworkElement>.Create;
+  Self.FTotalElements := ATotalElements;
+
+  for I := 0 to ATotalElements do
+    FElementos.Add(i, TNetworkElement.Create(i));
+
+  FElementos.TrimExcess;
+end;
+
+destructor TNetwork.Destroy;
+begin
+  if Assigned(FElementos) then
+    FElementos.Free;
+  inherited;
+end;
+
+function TNetwork.Query(AFirstElement, ASecondElement: integer): boolean;
+begin
+
+end;
+
+end.
